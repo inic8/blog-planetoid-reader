@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogPost from '../components/BlogPost.astro';
+
+const posts = await Astro.glob('./posts/*.md');
+---
+
+<Layout title="Scientific Blog">
+  <main>
+    <h1>Welcome to the Scientific Blog</h1>
+    <p>Explore our latest posts on various scientific topics.</p>
+    <ul>
+      {posts.map(post => (
+        <li>
+          <BlogPost url={post.url} title={post.frontmatter.title} />
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 800px;
+    max-width: calc(100% - 2rem);
+    color: #333;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 1rem;
+  }
+</style>
